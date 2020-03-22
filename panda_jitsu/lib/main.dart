@@ -1,4 +1,3 @@
-main() {
-	Game game = MyGameImpl();
-	runApp(game.widget);
-}
+import 'package:flutter/material.dart'
+
+void main() {}
