@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:panda_jitsu/jitsu-game.dart';
 
-// This is a fly object, it encapsulates its own render and update methods
+// This is a fly object, it encapsulates its own render and update methods.
+// Individual flies will have their own subclasses and implementions.
 class Fly {
 	final JitsuGame game;
 	bool isOffScreen = false;
@@ -15,9 +16,7 @@ class Fly {
 		flyPaint.color = Color(0xff6ab04c);
 	}
 
-	void render(Canvas c) {
-		c.drawRect(flyRect, flyPaint); // rect is immutable, use shift/translate to move
-	}
+	void render(Canvas c) {}
 
 	void update(double t) {
 		if (isDead) {

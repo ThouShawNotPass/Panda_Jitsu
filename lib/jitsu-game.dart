@@ -4,6 +4,7 @@ import 'package:flame/flame.dart'; // access Flame Util's initialDimensions
 import 'package:flame/game.dart'; // access Flame Game-Loop scaffolding
 import 'package:flutter/gestures.dart';
 import 'package:panda_jitsu/components/fly.dart'; // import the Fly class/object
+import 'package:panda_jitsu/components/backyard.dart'; // import the background
 
 // This is a JitsuGame class that has gameloop logic in it to control a jitsu game. 
 // It overrides the basic (empty) Game methods 'render' && 'update'.
@@ -11,6 +12,7 @@ class JitsuGame extends Game {
 	Size screenSize; // the size of the current device's screen
 	double tileSize; // the tile size for current screen resolution (1/9th screen width)
 	List<Fly> flies; // keep track of the flies in the game
+	Backyard background; // keep track of the background
 	Random rand; // generates new random integers
 
 	JitsuGame() {
@@ -19,10 +21,7 @@ class JitsuGame extends Game {
 
 	// Paints the new canvas
 	void render(Canvas canvas) {
-		Rect bgRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
-		Paint bgPaint = Paint();
-		bgPaint.color = Color(0xff576574);
-		canvas.drawRect(bgRect, bgPaint); // draws shape bgRect with color bgPaint
+		background.render(canvas);
 		flies.forEach((Fly fly) => fly.render(canvas)); // draws each fly
 	}
 
@@ -51,6 +50,7 @@ class JitsuGame extends Game {
 		flies = List<Fly>(); // initialize a list of Fly objects
 		rand = Random();
 		resize(await Flame.util.initialDimensions()); // get dimensions (returns Future<Size>)
+		background = Backyard(this);
 		spawnFly();
 	}
 
