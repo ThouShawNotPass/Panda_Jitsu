@@ -12,33 +12,11 @@ void main() async {
 	// make full screen and portrait mode (lock)
 	Util flameUtil = Util();
 	await flameUtil.fullScreen();
-	await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+	await flameUtil.setOrientation(DeviceOrientation.landscapeRight);
 
 	// load all assets (cached in a static variable in Flame to reuse later)
 	Flame.images.loadAll(<String>[
-		'bg/backyard.png',
-		'flies/agile-fly-1.png',
-		'flies/agile-fly-2.png',
-		'flies/agile-fly-dead.png',
-		'flies/drooler-fly-1.png',
-		'flies/drooler-fly-2.png',
-		'flies/drooler-fly-dead.png',
-		'flies/house-fly-1.png',
-		'flies/house-fly-2.png',
-		'flies/house-fly-dead.png',
-		'flies/hungry-fly-1.png',
-		'flies/hungry-fly-2.png',
-		'flies/hungry-fly-dead.png',
-		'flies/macho-fly-1.png',
-		'flies/macho-fly-2.png',
-		'flies/macho-fly-dead.png',
-    'bg/lose-splash.png',
-    'branding/title.png',
-    'ui/dialog-credits.png',
-    'ui/dialog-help.png',
-    'ui/icon-credits.png',
-    'ui/icon-help.png',
-    'ui/start-button.png',
+		'bg/dojo.png',
 	]);
 
 	// create a new instance of the game object
