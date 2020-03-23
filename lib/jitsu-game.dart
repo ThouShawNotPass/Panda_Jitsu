@@ -4,6 +4,11 @@ import 'package:flame/flame.dart'; // access Flame Util's initialDimensions
 import 'package:flame/game.dart'; // access Flame Game-Loop scaffolding
 import 'package:flutter/gestures.dart';
 import 'package:panda_jitsu/components/fly.dart'; // import the Fly class/object
+import 'package:panda_jitsu/components/house-fly.dart';
+import 'package:panda_jitsu/components/agile-fly.dart';
+import 'package:panda_jitsu/components/drooler-fly.dart';
+import 'package:panda_jitsu/components/hungry-fly.dart';
+import 'package:panda_jitsu/components/macho-fly.dart';
 import 'package:panda_jitsu/components/backyard.dart'; // import the background
 
 // This is a JitsuGame class that has gameloop logic in it to control a jitsu game. 
@@ -32,8 +37,8 @@ class JitsuGame extends Game {
 
 	// Calculates the size of the current screen and updates instance variable
 	void resize(Size size) {
-		this.screenSize = size;
-		this.tileSize = size.width / 9;
+		screenSize = size;
+		tileSize = size.width / 9;
 	}
 
 	void onTapDown(TapDownDetails d) {
@@ -50,14 +55,31 @@ class JitsuGame extends Game {
 		flies = List<Fly>(); // initialize a list of Fly objects
 		rand = Random();
 		resize(await Flame.util.initialDimensions()); // get dimensions (returns Future<Size>)
+		
 		background = Backyard(this);
 		spawnFly();
 	}
 
 	// spawns a fly at (50, 50)
 	void spawnFly() {
-		double x = rand.nextDouble() * (screenSize.width - tileSize);
-		double y = rand.nextDouble() * (screenSize.height - tileSize);
-		flies.add(Fly(this, x, y)); // the instance of JitsuGame is passed into fly class
+		double x = rand.nextDouble() * (screenSize.width - (tileSize * 2.025));
+		double y = rand.nextDouble() * (screenSize.height - (tileSize * 2.025));
+		switch (rand.nextInt(5)) {
+			case 0:
+				flies.add(HouseFly(this, x, y));
+				break;
+			case 1:
+				flies.add(DroolerFly(this, x, y));
+				break;
+			case 2:
+				flies.add(AgileFly(this, x, y));
+				break;
+			case 3:
+				flies.add(MachoFly(this, x, y));
+				break;
+			case 4:
+				flies.add(HungryFly(this, x, y));
+				break;	
+		}
 	}
 }
