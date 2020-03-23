@@ -12,8 +12,12 @@ class Fly {
 	bool isOffScreen = false;
 	bool isDead = false;
 	Rect flyRect;
+	Offset targetLocation;
+	double get speed => game.tileSize * 3; // getter for the speed property
 
-	Fly(this.game); // constructs new fly object with reference to game
+	Fly(this.game) {
+		setTargetLocation();
+	}
 
 	void render(Canvas c) {
 		// .inflate(2) makes sprite 2x bigger than hitbox (flyRect)
@@ -32,16 +36,31 @@ class Fly {
 				isOffScreen = true;
 			}
 		} else {
-			flyingSpriteIndex = t % 2;
-			// flyingSpriteIndex += 30 * t;
-			// if (flyingSpriteIndex >= 2) {
-			// 	flyingSpriteIndex -= 2;
-			// }
+			flyingSpriteIndex += 30 * t;
+			if (flyingSpriteIndex >= 2) {
+				flyingSpriteIndex -= 2;
+			}
+
+			double stepDistance = speed * t;
+			Offset toTarget = targetLocation - Offset(flyRect.left, flyRect.top);
+			if (stepDistance < toTarget.distance) {
+				Offset stepToTarget = Offset.fromDirection(toTarget.direction, stepDistance);
+				flyRect = flyRect.shift(stepToTarget);
+			} else {
+				flyRect = flyRect.shift(toTarget);
+				setTargetLocation();
+			}
 		}
 	}
 
 	void kill() {
 		isDead = true;
 		game.spawnFly(); // create a new fly each time one dies
+	}
+
+	void setTargetLocation() {
+		double x = game.rand.nextDouble() * (game.screenSize.width - (game.tileSize * 2.025));
+		double y = game.rand.nextDouble() * (game.screenSize.height - (game.tileSize * 2.025));
+		targetLocation = Offset(x, y);
 	}
 }
