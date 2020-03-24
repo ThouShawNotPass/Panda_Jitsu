@@ -3,7 +3,7 @@ description: A card-based, cross-platform game made in Flutter.
 
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
 # Read more about iOS versioning at https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
